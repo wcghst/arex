@@ -1,0 +1,6 @@
+{
+  "name": "Apex Services",
+  "description": "Premium Landscaping, Lawn, Fence, Deck, Window/Pressure Washing, and Snow Removal Services with smart satellite quoting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
