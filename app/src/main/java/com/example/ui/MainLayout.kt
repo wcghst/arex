@@ -43,6 +43,7 @@ import com.example.data.CustomerProfile
 import com.example.data.LeadSequenceState
 import com.example.data.PropertyMappingResult
 import com.example.data.ServiceQuote
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import com.example.ui.theme.*
 import com.example.viewmodel.ServiceViewModel
 
@@ -405,9 +406,51 @@ fun ClientPortalScreen(viewModel: ServiceViewModel) {
 
         if (activeProfile == null) {
             HeroSection()
-            ServiceSelectionSection(viewModel = viewModel)
-            PackagePlansSection(viewModel = viewModel)
-            QuoteFormSection(viewModel = viewModel)
+
+            // Form Experience Switcher
+            var selectedFormTab by remember { mutableStateOf("Tailwind") }
+
+            TabRow(
+                selectedTabIndex = if (selectedFormTab == "Tailwind") 0 else 1,
+                containerColor = CharcoalSurface,
+                contentColor = GoldPrimary,
+                indicator = { tabPositions ->
+                    TabRowDefaults.SecondaryIndicator(
+                        Modifier.tabIndicatorOffset(tabPositions[if (selectedFormTab == "Tailwind") 0 else 1]),
+                        color = GoldPrimary
+                    )
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .border(BorderStroke(1.dp, Color(0x1AFFFFFF)), RoundedCornerShape(12.dp))
+            ) {
+                Tab(
+                    selected = selectedFormTab == "Tailwind",
+                    onClick = { selectedFormTab = "Tailwind" },
+                    text = { Text("SaaS Tailwind Form", fontWeight = FontWeight.Bold, fontSize = 12.sp) }
+                )
+                Tab(
+                    selected = selectedFormTab == "Native",
+                    onClick = { selectedFormTab = "Native" },
+                    text = { Text("Native Compose Form", fontWeight = FontWeight.Bold, fontSize = 12.sp) }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            if (selectedFormTab == "Tailwind") {
+                TailwindQuoteFormWebView(
+                    viewModel = viewModel,
+                    onQuoteSubmitted = {
+                        // Handled via activeProfile updates
+                    }
+                )
+            } else {
+                ServiceSelectionSection(viewModel = viewModel)
+                PackagePlansSection(viewModel = viewModel)
+                QuoteFormSection(viewModel = viewModel)
+            }
         } else {
             CustomerPortalDashboard(
                 profile = activeProfile!!,

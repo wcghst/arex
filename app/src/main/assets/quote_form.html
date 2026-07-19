@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estate Gold - Premium Quote Request</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        charcoal: {
+                            bg: '#121212',
+                            surface: '#1A1A1A',
+                            light: '#242424',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                        },
+                        gold: {
+                            primary: '#D4AF37',
+                            accent: '#F39C12',
+                            light: '#F1C40F',
+                            muted: '#9A7B1C',
+                            bgMuted: 'rgba(212, 175, 55, 0.1)'
+                        },
+                        onCharcoal: '#E2E8F0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #E2E8F0;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #242424;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-6 bg-charcoal-bg min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-2xl bg-charcoal-surface border border-charcoal-border rounded-3xl overflow-hidden shadow-2xl">
+        <!-- SaaS Badge Header -->
+        <div class="p-6 md:p-8 border-b border-charcoal-border bg-gradient-to-r from-charcoal-surface via-charcoal-light to-charcoal-surface text-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-gold-primary bg-gold-bgMuted border border-gold-primary/30 mb-4 tracking-wider uppercase">
+                👑 Golden SaaS Portal
+            </span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+                Request Your Premium Quote
+            </h1>
+            <p class="text-onCharcoal/70 text-sm mt-2 max-w-md mx-auto">
+                Select your bespoke services and choose your precision survey method to receive your autocalculated estimate.
+            </p>
+        </div>
+
+        <!-- Quote Form -->
+        <form id="quoteForm" onsubmit="handleFormSubmit(event)" class="p-6 md:p-8 space-y-6">
+            <!-- 1. Service Selection -->
+            <div class="space-y-3">
+                <label class="block text-gold-primary text-sm font-bold tracking-wider uppercase">
+                    1. Bespoke Services Requested
+                </label>
+                <p class="text-xs text-onCharcoal/50 -mt-1">Select one or more estate maintenance services.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                    <!-- Grass Cutting -->
+                    <label class="service-card flex items-start gap-3 p-3.5 bg-charcoal-light border border-charcoal-border hover:border-gold-primary/40 rounded-xl cursor-pointer transition-all duration-200 select-none">
+                        <input type="checkbox" name="services" value="Grass Cutting" class="mt-1 h-4.5 w-4.5 rounded border-charcoal-border text-gold-primary focus:ring-gold-primary focus:ring-offset-charcoal-bg bg-charcoal-bg" onchange="toggleServiceStyle(this)">
+                        <div class="space-y-0.5">
+                            <span class="block text-sm font-bold text-white transition-colors duration-150">Grass Cutting</span>
+                            <span class="block text-xs text-onCharcoal/60 leading-tight">Manicured cuts, trimming, blowing.</span>
+                        </div>
+                    </label>
+
+                    <!-- Landscaping -->
+                    <label class="service-card flex items-start gap-3 p-3.5 bg-charcoal-light border border-charcoal-border hover:border-gold-primary/40 rounded-xl cursor-pointer transition-all duration-200 select-none">
+                        <input type="checkbox" name="services" value="Landscaping" class="mt-1 h-4.5 w-4.5 rounded border-charcoal-border text-gold-primary focus:ring-gold-primary focus:ring-offset-charcoal-bg bg-charcoal-bg" onchange="toggleServiceStyle(this)">
+                        <div class="space-y-0.5">
+                            <span class="block text-sm font-bold text-white transition-colors duration-150">Landscaping</span>
+                            <span class="block text-xs text-onCharcoal/60 leading-tight">Custom design layouts, mulch & beds.</span>
+                        </div>
+                    </label>
+
+                    <!-- Fence Building -->
+                    <label class="service-card flex items-start gap-3 p-3.5 bg-charcoal-light border border-charcoal-border hover:border-gold-primary/40 rounded-xl cursor-pointer transition-all duration-200 select-none">
+                        <input type="checkbox" name="services" value="Fence Building" class="mt-1 h-4.5 w-4.5 rounded border-charcoal-border text-gold-primary focus:ring-gold-primary focus:ring-offset-charcoal-bg bg-charcoal-bg" onchange="toggleServiceStyle(this)">
+                        <div class="space-y-0.5">
+                            <span class="block text-sm font-bold text-white transition-colors duration-150">Fence Building</span>
+                            <span class="block text-xs text-onCharcoal/60 leading-tight">Cedar or composite fencing built to last.</span>
+                        </div>
+                    </label>
+
+                    <!-- Deck Building -->
+                    <label class="service-card flex items-start gap-3 p-3.5 bg-charcoal-light border border-charcoal-border hover:border-gold-primary/40 rounded-xl cursor-pointer transition-all duration-200 select-none">
+                        <input type="checkbox" name="services" value="Deck Building" class="mt-1 h-4.5 w-4.5 rounded border-charcoal-border text-gold-primary focus:ring-gold-primary focus:ring-offset-charcoal-bg bg-charcoal-bg" onchange="toggleServiceStyle(this)">
+                        <div class="space-y-0.5">
+                            <span class="block text-sm font-bold text-white transition-colors duration-150">Deck Building</span>
+                            <span class="block text-xs text-onCharcoal/60 leading-tight">Custom premium entertainment decks.</span>
+                        </div>
+                    </label>
+
+                    <!-- Window Washing -->
+                    <label class="service-card flex items-start gap-3 p-3.5 bg-charcoal-light border border-charcoal-border hover:border-gold-primary/40 rounded-xl cursor-pointer transition-all duration-200 select-none">
+                        <input type="checkbox" name="services" value="Window Washing" class="mt-1 h-4.5 w-4.5 rounded border-charcoal-border text-gold-primary focus:ring-gold-primary focus:ring-offset-charcoal-bg bg-charcoal-bg" onchange="toggleServiceStyle(this)">
+                        <div class="space-y-0.5">
+                            <span class="block text-sm font-bold text-white transition-colors duration-150">Window Washing</span>
+                            <span class="block text-xs text-onCharcoal/60 leading-tight">Streak-free deep pane glass wash.</span>
+                        </div>
+                    </label>
+
+                    <!-- Pressure Washing -->
+                    <label class="service-card flex items-start gap-3 p-3.5 bg-charcoal-light border border-charcoal-border hover:border-gold-primary/40 rounded-xl cursor-pointer transition-all duration-200 select-none">
+                        <input type="checkbox" name="services" value="Pressure Washing" class="mt-1 h-4.5 w-4.5 rounded border-charcoal-border text-gold-primary focus:ring-gold-primary focus:ring-offset-charcoal-bg bg-charcoal-bg" onchange="toggleServiceStyle(this)">
+                        <div class="space-y-0.5">
+                            <span class="block text-sm font-bold text-white transition-colors duration-150">Pressure Washing</span>
+                            <span class="block text-xs text-onCharcoal/60 leading-tight">Blasts grime from concrete & sidings.</span>
+                        </div>
+                    </label>
+
+                    <!-- Snow Removal -->
+                    <label class="service-card flex items-start gap-3 p-3.5 bg-charcoal-light border border-charcoal-border hover:border-gold-primary/40 rounded-xl cursor-pointer transition-all duration-200 select-none md:col-span-2">
+                        <input type="checkbox" name="services" value="Snow Removal" class="mt-1 h-4.5 w-4.5 rounded border-charcoal-border text-gold-primary focus:ring-gold-primary focus:ring-offset-charcoal-bg bg-charcoal-bg" onchange="toggleServiceStyle(this)">
+                        <div class="space-y-0.5">
+                            <span class="block text-sm font-bold text-white transition-colors duration-150">Snow Removal</span>
+                            <span class="block text-xs text-onCharcoal/60 leading-tight">Prompt winter plowing, walkway salting, and rapid care.</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 2. Preferred Survey Method -->
+            <div class="space-y-3">
+                <label class="block text-gold-primary text-sm font-bold tracking-wider uppercase">
+                    2. Preferred Quote Survey Method
+                </label>
+                <p class="text-xs text-onCharcoal/50 -mt-1">How should we evaluate your estate layout?</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <!-- In-Person Visit -->
+                    <label class="method-card relative p-4 bg-charcoal-light border border-charcoal-border rounded-xl cursor-pointer text-center block transition-all duration-200 select-none">
+                        <input type="radio" name="method" value="In-Person" class="sr-only" checked onchange="updateMethodStyles()">
+                        <div class="flex flex-col items-center gap-2">
+                            <span class="text-xl">🏡</span>
+                            <span class="block text-sm font-bold text-white">In-Person Visit</span>
+                            <span class="block text-[10px] text-onCharcoal/50 leading-normal">On-site measurement & physical consultation.</span>
+                        </div>
+                    </label>
+
+                    <!-- Google Earth -->
+                    <label class="method-card relative p-4 bg-charcoal-light border border-charcoal-border rounded-xl cursor-pointer text-center block transition-all duration-200 select-none">
+                        <input type="radio" name="method" value="Phone Map" class="sr-only" onchange="updateMethodStyles()">
+                        <div class="flex flex-col items-center gap-2">
+                            <span class="text-xl">🌎</span>
+                            <span class="block text-sm font-bold text-white">Google Earth</span>
+                            <span class="block text-[10px] text-onCharcoal/50 leading-normal">Virtual property boundary assessment.</span>
+                        </div>
+                    </label>
+
+                    <!-- Automatic Map Lookup -->
+                    <label class="method-card relative p-4 bg-charcoal-light border border-charcoal-border rounded-xl cursor-pointer text-center block transition-all duration-200 select-none">
+                        <input type="radio" name="method" value="Auto Map" class="sr-only" onchange="updateMethodStyles()">
+                        <div class="flex flex-col items-center gap-2">
+                            <span class="text-xl">⚡</span>
+                            <span class="block text-sm font-bold text-white">Automatic Lookup</span>
+                            <span class="block text-[10px] text-onCharcoal/50 leading-normal">Real-time satellite quote generated instantly.</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 3. Property & Contact Details -->
+            <div class="space-y-4 pt-2">
+                <label class="block text-gold-primary text-sm font-bold tracking-wider uppercase">
+                    3. Contact & Property Information
+                </label>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Full Name -->
+                    <div class="space-y-1">
+                        <label for="fullName" class="text-xs font-semibold text-onCharcoal/80">Your Contact Name</label>
+                        <input type="text" id="fullName" required class="w-full bg-charcoal-light border border-charcoal-border focus:border-gold-primary focus:ring-1 focus:ring-gold-primary rounded-xl px-4 py-2.5 text-sm text-white placeholder-onCharcoal/30 outline-none transition" placeholder="John Doe">
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="space-y-1">
+                        <label for="email" class="text-xs font-semibold text-onCharcoal/80">Email Address</label>
+                        <input type="email" id="email" required class="w-full bg-charcoal-light border border-charcoal-border focus:border-gold-primary focus:ring-1 focus:ring-gold-primary rounded-xl px-4 py-2.5 text-sm text-white placeholder-onCharcoal/30 outline-none transition" placeholder="john@example.com">
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="space-y-1">
+                        <label for="phone" class="text-xs font-semibold text-onCharcoal/80">Phone Number</label>
+                        <input type="tel" id="phone" required class="w-full bg-charcoal-light border border-charcoal-border focus:border-gold-primary focus:ring-1 focus:ring-gold-primary rounded-xl px-4 py-2.5 text-sm text-white placeholder-onCharcoal/30 outline-none transition" placeholder="(555) 019-2834">
+                    </div>
+
+                    <!-- Booking Date -->
+                    <div class="space-y-1">
+                        <label for="bookingDate" class="text-xs font-semibold text-onCharcoal/80">Preferred Start Date</label>
+                        <input type="date" id="bookingDate" class="w-full bg-charcoal-light border border-charcoal-border focus:border-gold-primary focus:ring-1 focus:ring-gold-primary rounded-xl px-4 py-2.5 text-sm text-white outline-none transition">
+                    </div>
+                </div>
+
+                <!-- Property Address -->
+                <div class="space-y-1">
+                    <label for="address" class="text-xs font-semibold text-onCharcoal/80">Property Address</label>
+                    <input type="text" id="address" required class="w-full bg-charcoal-light border border-charcoal-border focus:border-gold-primary focus:ring-1 focus:ring-gold-primary rounded-xl px-4 py-2.5 text-sm text-white placeholder-onCharcoal/30 outline-none transition" placeholder="123 Luxury Way, Beverly Hills, CA">
+                </div>
+
+                <!-- Notes / Obstacles -->
+                <div class="space-y-1">
+                    <label for="notes" class="text-xs font-semibold text-onCharcoal/80">Special Property Obstacles or Instructions (Optional)</label>
+                    <textarea id="notes" rows="2" class="w-full bg-charcoal-light border border-charcoal-border focus:border-gold-primary focus:ring-1 focus:ring-gold-primary rounded-xl px-4 py-2.5 text-sm text-white placeholder-onCharcoal/30 outline-none transition resize-none" placeholder="Sloped terrain in backyard, locked side gate, dog on property, etc."></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="submitBtn" class="w-full mt-6 bg-gold-primary hover:bg-gold-accent active:bg-gold-muted text-charcoal-bg font-extrabold uppercase tracking-widest text-sm py-4 rounded-xl shadow-lg shadow-gold-primary/10 transition duration-150 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                <span>🛰️ Generate My Quote Now</span>
+            </button>
+        </form>
+
+        <!-- Success Toast / Notification Overlay -->
+        <div id="successOverlay" class="hidden p-8 text-center bg-charcoal-surface flex flex-col items-center justify-center space-y-4 animate-fade-in">
+            <div class="h-16 w-16 bg-gold-bgMuted text-gold-primary rounded-full flex items-center justify-center text-3xl border border-gold-primary/35 shadow-lg shadow-gold-primary/5">
+                🎉
+            </div>
+            <h2 class="text-xl font-bold text-white">Quote Request Transmitted!</h2>
+            <p class="text-onCharcoal/70 text-xs max-w-sm">
+                Your luxury property details have been securely synced. The automated lead generation and email sequencing has been initiated.
+            </p>
+            <div class="pt-4">
+                <button onclick="resetQuoteForm()" class="px-5 py-2 bg-charcoal-light hover:bg-charcoal-border border border-charcoal-border hover:border-gold-primary/30 text-white font-semibold text-xs rounded-lg transition">
+                    Submit Another Request
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set default date value (today's date or suggestive)
+        document.getElementById('bookingDate').value = "2026-07-19";
+
+        function toggleServiceStyle(checkbox) {
+            const card = checkbox.closest('.service-card');
+            if (checkbox.checked) {
+                card.classList.remove('bg-charcoal-light', 'border-charcoal-border');
+                card.classList.add('bg-gold-bgMuted', 'border-gold-primary');
+                card.querySelector('span:first-of-type').classList.add('text-gold-primary');
+            } else {
+                card.classList.add('bg-charcoal-light', 'border-charcoal-border');
+                card.classList.remove('bg-gold-bgMuted', 'border-gold-primary');
+                card.querySelector('span:first-of-type').classList.remove('text-gold-primary');
+            }
+        }
+
+        function updateMethodStyles() {
+            const methods = document.getElementsByName('method');
+            methods.forEach(radio => {
+                const card = radio.closest('.method-card');
+                if (radio.checked) {
+                    card.classList.remove('bg-charcoal-light', 'border-charcoal-border');
+                    card.classList.add('bg-gold-bgMuted', 'border-gold-primary', 'ring-1', 'ring-gold-primary');
+                } else {
+                    card.classList.add('bg-charcoal-light', 'border-charcoal-border');
+                    card.classList.remove('bg-gold-bgMuted', 'border-gold-primary', 'ring-1', 'ring-gold-primary');
+                }
+            });
+        }
+
+        // Call initially to style the checked radio
+        updateMethodStyles();
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Extract selected services
+            const checkedBoxes = document.querySelectorAll('input[name="services"]:checked');
+            if (checkedBoxes.length === 0) {
+                alert("Please select at least one Bespoke Service.");
+                return;
+            }
+            const services = Array.from(checkedBoxes).map(cb => cb.value).join(",");
+
+            // Extract contact fields
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const bookingDate = document.getElementById('bookingDate').value;
+            const address = document.getElementById('address').value.trim();
+            const notes = document.getElementById('notes').value.trim();
+
+            // Extract method
+            const methodRadio = document.querySelector('input[name="method"]:checked');
+            const method = methodRadio ? methodRadio.value : "Auto Map";
+
+            // Disable submit button during processing
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '🛰️ Syncing and Estimating...';
+
+            setTimeout(() => {
+                // Bridge back to Android Kotlin app if available
+                if (window.AndroidInterface && typeof window.AndroidInterface.submitQuote === 'function') {
+                    window.AndroidInterface.submitQuote(name, email, phone, address, services, method, notes, bookingDate);
+                } else {
+                    console.log("No AndroidInterface found, running in fallback browser sandbox mode:", {
+                        name, email, phone, address, services, method, notes, bookingDate
+                    });
+                }
+
+                // Show Success Transition
+                document.getElementById('quoteForm').classList.add('hidden');
+                document.getElementById('successOverlay').classList.remove('hidden');
+            }, 1200);
+        }
+
+        function resetQuoteForm() {
+            // Uncheck all boxes
+            const checkedBoxes = document.querySelectorAll('input[name="services"]:checked');
+            checkedBoxes.forEach(cb => {
+                cb.checked = false;
+                toggleServiceStyle(cb);
+            });
+
+            // Reset text fields
+            document.getElementById('fullName').value = "";
+            document.getElementById('email').value = "";
+            document.getElementById('phone').value = "";
+            document.getElementById('bookingDate').value = "2026-07-19";
+            document.getElementById('address').value = "";
+            document.getElementById('notes').value = "";
+
+            // Reset buttons
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '🛰️ Generate My Quote Now';
+
+            // Show form again
+            document.getElementById('successOverlay').classList.add('hidden');
+            document.getElementById('quoteForm').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
